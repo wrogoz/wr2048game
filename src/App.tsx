@@ -4,6 +4,9 @@ import { connect } from "react-redux";
 import Board from "./board";
 
 const App = () => {
+
+
+
   return (
     <Container>
       <Table>
