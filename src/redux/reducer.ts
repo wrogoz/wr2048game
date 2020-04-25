@@ -2,10 +2,10 @@
 let initialState = {
 
     boardArray:[
-      [2,null,null,4],
-      [null,null,null,null],
-      [null,null,null,null],
-      [null,null,null,null]
+      [4,null,null,2],
+      [2,2,null,2],
+      [16,null,null,null],
+      [16,16,null,32]
 ],
   bubu:true
 }

@@ -1,11 +1,11 @@
 export const AddNewNumberToBoard = (array: any) => {
-  let propsArray = [...array];
+  let modifiedArray = [...array];
   let index1 = Math.floor(Math.random() * 4);
   let index2 = Math.floor(Math.random() * 4);
   let isNumberHasAdded = false;
   while (!isNumberHasAdded) {
-    if (propsArray[index1][index2] === null && isNumberHasAdded === false) {
-      propsArray[index1][index2] = 2;
+    if (modifiedArray[index1][index2] === null && isNumberHasAdded === false) {
+      modifiedArray[index1][index2] = 2;
       isNumberHasAdded = true;
       console.log("while loop added 2");
     } else {
@@ -15,31 +15,36 @@ export const AddNewNumberToBoard = (array: any) => {
     }
   }
 
-  return { type: "ADD_NEW_NUMBER_TO_TABLE", boardArray: propsArray };
+  return { type: "ADD_NEW_NUMBER_TO_TABLE", boardArray: modifiedArray };
 };
 
 export const MoveToTheRight = (array: any) => {
-  let propsArray = [...array];
-
-  let counter = 0;
-  while (counter<3) {
-    for (let i = 0; i < propsArray.length - 1; i++) {
-      if (propsArray[0][i] !== null && propsArray[0][i + 1] === null) {
-        propsArray[0][i + 1] = propsArray[0][i];
-        propsArray[0][i] = null;
+  let modifiedArray = [...array];
 
 
-      }
-      else if(propsArray[0][i]===propsArray[0][i+1] && propsArray[0][i]!==null ){
+  for (let row = 0; row < modifiedArray.length; row++) {
+    let counter = 0;
+    while (counter<3) {
+      for (let indexOfTile = modifiedArray.length-1; indexOfTile  > 0; indexOfTile--) {
 
-        propsArray[0][i+1]=propsArray[0][i]+propsArray[0][i+1];
-        propsArray[0][i]=null;
-        console.log(typeof(propsArray[0][i+1]))
+        // if the number on beside is same as this number
+        if(modifiedArray[row][indexOfTile]===modifiedArray[row][indexOfTile-1] && modifiedArray[row][indexOfTile]!==null){
+          modifiedArray[row][indexOfTile]=modifiedArray[row][indexOfTile]+modifiedArray[row][indexOfTile-1];
+          modifiedArray[row][indexOfTile-1]=null;
+        }
+
+        // if the tile beside of this is number and this tile is null
+        else if(modifiedArray[row][indexOfTile]===null && modifiedArray[row][indexOfTile-1]!==null){
+          modifiedArray[row][indexOfTile]=modifiedArray[row][indexOfTile-1];
+          modifiedArray[row][indexOfTile-1]=null;
+        }
       }
       counter++
-      console.log(counter)
-    }
+      }
+
   }
 
-  return { type: "MOVETOTHERIGHT", boardArray: propsArray };
-};
+  return { type: "MOVETOTHERIGHT", boardArray: modifiedArray };
+  };
+
+
