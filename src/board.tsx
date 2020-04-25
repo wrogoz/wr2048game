@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { AddNewNumberToBoard } from "./redux/actions";
+import {MoveToTheRight} from './redux/actions';
 interface BoardProps {
   boardArray: any;
   dispatch: any;
@@ -9,14 +10,18 @@ interface BoardProps {
 }
 
 const Board = (props: BoardProps) => {
+
   const KeyPressAction = (e: { keyCode: number }) => {
     if (e.keyCode === 39) {
-      props.dispatch(AddNewNumberToBoard(props.boardArray));
+      // props.dispatch(AddNewNumberToBoard(props.boardArray));
+      props.dispatch(MoveToTheRight(props.boardArray))
     }
 
 
     window.removeEventListener("keyup", KeyPressAction);
   };
+
+
 
   window.addEventListener("keyup", KeyPressAction);
 

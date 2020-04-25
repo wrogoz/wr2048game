@@ -2,7 +2,7 @@
 let initialState = {
 
     boardArray:[
-      [null,null,null,null],
+      [2,null,null,4],
       [null,null,null,null],
       [null,null,null,null],
       [null,null,null,null]
@@ -26,6 +26,13 @@ let initialState = {
 
           }
           case 'ADD_NEW_NUMBER_TO_TABLE':
+            return {
+            ...state,
+            boardArray:action.boardArray
+
+
+            }
+            case 'MOVETOTHERIGHT':
             return {
             ...state,
             boardArray:action.boardArray
