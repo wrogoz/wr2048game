@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { AddNewNumberToBoard } from "./redux/actions";
+import { AddNewNumberToBoard, MoveToTheTop, MoveToTheBottom } from "./redux/actions";
 import {MoveToTheRight} from './redux/actions';
 import {MoveToTheLeft} from './redux/actions';
 interface BoardProps {
@@ -22,10 +22,10 @@ const Board = (props: BoardProps) => {
       props.dispatch(MoveToTheLeft(props.boardArray,KeyPressAction))
     }
     else if(e.keyCode===38){
-      console.log('arrow up clicked')
+      props.dispatch(MoveToTheTop(props.boardArray,KeyPressAction))
     }
     else if(e.keyCode===40){
-      console.log('arrow down clicked')
+      props.dispatch(MoveToTheBottom(props.boardArray,KeyPressAction))
     }
 
 
