@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { AddNewNumberToBoard } from "./redux/actions";
 import {MoveToTheRight} from './redux/actions';
+import {MoveToTheLeft} from './redux/actions';
 interface BoardProps {
   boardArray: any;
   dispatch: any;
@@ -14,11 +15,21 @@ const Board = (props: BoardProps) => {
   const KeyPressAction = (e: { keyCode: number }) => {
     if (e.keyCode === 39) {
       // props.dispatch(AddNewNumberToBoard(props.boardArray));
-      props.dispatch(MoveToTheRight(props.boardArray))
+      props.dispatch(MoveToTheRight(props.boardArray,KeyPressAction))
+
+    }
+    else if(e.keyCode===37){
+      props.dispatch(MoveToTheLeft(props.boardArray,KeyPressAction))
+    }
+    else if(e.keyCode===38){
+      console.log('arrow up clicked')
+    }
+    else if(e.keyCode===40){
+      console.log('arrow down clicked')
     }
 
 
-    window.removeEventListener("keyup", KeyPressAction);
+
   };
 
 

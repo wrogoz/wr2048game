@@ -39,10 +39,26 @@ let initialState = {
 
 
             }
+            case 'MOVETOTHELEFT':
+              return {
+              ...state,
+              boardArray:action.boardArray
+              }
+              case 'MOVETOTHETOP':
+              return {
+              ...state,
+              boardArray:action.boardArray
+              }
+              case 'MOVETOTHEBOTTOM':
+              return {
+              ...state,
+              boardArray:action.boardArray
+              }
 
         default:
           return state
       }
+
     }
 
     export default reducer;
