@@ -1,6 +1,6 @@
-export const AddNewNumberToBoard = (
-  array: [[null | number]],
-  disableThisAction: any
+const AddNewNumberToBoard = (
+  array: [number][]
+
 ) => {
   let modifiedArray = [...array];
   let index1 = Math.floor(Math.random() * 4);
@@ -8,16 +8,16 @@ export const AddNewNumberToBoard = (
   let isNumberHasAdded = false;
   while (!isNumberHasAdded) {
     if (modifiedArray[index1][index2] === null && isNumberHasAdded === false) {
-      modifiedArray[index1][index2] = 2;
+      modifiedArray[index1][index2] = 2 ;
       isNumberHasAdded = true;
-      console.log("while loop added 2");
+      console.log("while loop added 2 or 4");
     } else {
       index1 = Math.floor(Math.random() * 4);
       index2 = Math.floor(Math.random() * 4);
-      console.log("while loop");
+      console.log("number isnt added");
     }
   }
-  window.removeEventListener("keyup", disableThisAction);
+
   return { type: "ADD_NEW_NUMBER_TO_TABLE", boardArray: modifiedArray };
 };
 
@@ -63,6 +63,7 @@ export const MoveToTheRight = (
       counter++;
     }
   }
+  AddNewNumberToBoard(modifiedArray)
   window.removeEventListener("keyup", disableThisAction);
   return { type: "MOVETOTHERIGHT", boardArray: modifiedArray };
 };
@@ -100,6 +101,7 @@ export const MoveToTheLeft = (array: [[null | number]],disableThisAction: any ) 
       counter++;
     }
   }
+  AddNewNumberToBoard(modifiedArray)
   console.log("move to the left :)");
   window.removeEventListener("keyup", disableThisAction);
 
@@ -143,7 +145,7 @@ export const MoveToTheTop = (
       counter++;
     }
   }
-
+  AddNewNumberToBoard(modifiedArray)
 
   console.log("moved up:)");
   window.removeEventListener("keyup", disableThisAction);
@@ -197,7 +199,7 @@ export const MoveToTheBottom = (
 
     }
   }
-
+  AddNewNumberToBoard(modifiedArray)
   console.log("moved bottom:)");
   window.removeEventListener("keyup", disableThisAction);
 
