@@ -1,7 +1,7 @@
-import React from "react";
+import React,{useEffect} from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { MoveToTheTop, MoveToTheBottom } from "./redux/actions";
+import { AddNewNumberToBoard, MoveToTheTop, MoveToTheBottom } from "./redux/actions";
 import {MoveToTheRight} from './redux/actions';
 import {MoveToTheLeft} from './redux/actions';
 interface BoardProps {
@@ -13,39 +13,26 @@ interface BoardProps {
 const Board = (props: BoardProps) => {
 
 
+
+
   const KeyPressAction = (e: { keyCode: number }) => {
     if (e.keyCode === 39) {
       props.dispatch(MoveToTheRight(props.boardArray,KeyPressAction))
-
       }
-
-
-
-
     else if(e.keyCode===37){
       props.dispatch(MoveToTheLeft(props.boardArray,KeyPressAction));
-
-
     }
     else if(e.keyCode===38){
       props.dispatch(MoveToTheTop(props.boardArray,KeyPressAction));
-
-
     }
     else if(e.keyCode===40){
       props.dispatch(MoveToTheBottom(props.boardArray,KeyPressAction));
-
-
     }
     else if(e.keyCode===65){
 
 
     }
-
-
-
   };
-
 
 
   window.addEventListener("keyup", KeyPressAction);
@@ -69,12 +56,14 @@ const BoardRow = styled.div`
   align-items: space-evenly;
 `;
 const Tile = styled.div`
+  font-size:20px;
   height: 80px;
   width: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
+  border: 2px solid #777;
+  border-radius:10%;
 `;
 
 const mapStateToProps = (state: { boardArray: any; bubu: boolean }) => {

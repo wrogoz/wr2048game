@@ -1,30 +1,19 @@
 
-let initialState = {
+let initialState:{} = {
 
     boardArray:[
-      [null,null,2,2],
+      [null,null,null,null],
       [null,null,null,null],
       [null,null,null,null],
       [null,null,null,null]
-],
-  bubu:true
+]
 }
 
 
 
-  const reducer = (state = initialState, action: { type: string ,boardArray:any})=> {
+  const reducer = (state = initialState, action: { type: string ,boardArray:number[][]})=> {
       switch (action.type) {
-        case 'TEST':
-          return {
-          ...state,
-            boardArray:[
-              ['00','01','02','03'],
-              ['10','aza','12','13'],
-              ['20','21','22','23'],
-              ['30','31','32','33']
-        ]
 
-          }
           case 'ADD_NEW_NUMBER_TO_TABLE':
             return {
             ...state,
