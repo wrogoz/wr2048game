@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import Board from "./board";
 import Boardwithclasses from './boardwithclasses'
+import Button from './newGameButton';
+
 
 const App = () => {
 
@@ -11,6 +13,7 @@ const App = () => {
   return (
     <Container>
       <Table>
+        <Button btnText="New Game"/>
         <Boardwithclasses/>
       </Table>
     </Container>
@@ -36,6 +39,7 @@ const Table = styled.div`
   justify-content: space-evenly;
   align-items: space-evenly;
   padding:15px;
+  position:relative;
 `;
 
 const mapStateToProps = (state: { array: any }) => {

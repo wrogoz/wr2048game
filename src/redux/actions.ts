@@ -1,4 +1,39 @@
-export const AddNewNumberToBoard = (array: [number][], numberValue: number) => {
+const Add2or4ToArray=(userArray:any[][])=>{
+  let array=userArray;
+  let index1 = Math.floor(Math.random() * 4);
+  let index2 = Math.floor(Math.random() * 4);
+  let isNumberHasAdded = false;
+  while (!isNumberHasAdded) {
+    if (userArray[index1][index2] === null && isNumberHasAdded === false) {
+      userArray[index1][index2] = 2+2*Math.round(Math.random());
+      isNumberHasAdded = true;
+
+    } else {
+      index1 = Math.floor(Math.random() * 4);
+      index2 = Math.floor(Math.random() * 4);
+    }
+  }
+  return array
+}
+export const StartNewGame = ()=>{
+
+   let modifiedArray: any[][]=[
+    [null,null,null,null],
+    [null,null,null,null],
+    [null,null,null,null],
+    [null,null,null,null]
+];
+modifiedArray=Add2or4ToArray(modifiedArray);
+modifiedArray=Add2or4ToArray(modifiedArray);
+  return {
+    type:"START_NEW_GAME",
+    boardArray:modifiedArray,
+    result:0
+  }
+
+}
+
+export const AddNewNumberToBoard = (array: number[][], numberValue: number) => {
   let modifiedArray = [...array];
   let index1 = Math.floor(Math.random() * 4);
   let index2 = Math.floor(Math.random() * 4);
@@ -7,7 +42,7 @@ export const AddNewNumberToBoard = (array: [number][], numberValue: number) => {
     if (modifiedArray[index1][index2] === null && isNumberHasAdded === false) {
       modifiedArray[index1][index2] = numberValue;
       isNumberHasAdded = true;
-      console.log("while loop added 2 or 4");
+
     } else {
       index1 = Math.floor(Math.random() * 4);
       index2 = Math.floor(Math.random() * 4);
@@ -17,9 +52,26 @@ export const AddNewNumberToBoard = (array: [number][], numberValue: number) => {
   return { type: "ADD_NEW_NUMBER_TO_TABLE", boardArray: modifiedArray };
 };
 
+
+
+
+export const CheckResult=(userArray:any[][],userResult:number)=>{
+  let result=userResult;
+  userArray.forEach(element => {
+    element.forEach( tile => {
+      if(tile>result){
+        result=tile
+      }
+    });
+  });
+
+  return result;
+}
+
 export const MoveToTheRight = (
-  array: [[null | number]],
-  disableThisAction: any
+  array: number[][],
+  disableThisAction: any,
+  userResult:number
 ) => {
   let modifiedArray = [...array];
   let canAddNewNumber = false;
@@ -66,13 +118,14 @@ export const MoveToTheRight = (
     AddNewNumberToBoard(modifiedArray, 2);
   }
   window.removeEventListener("keyup", disableThisAction);
-
-  return { type: "MOVETOTHERIGHT", boardArray: modifiedArray };
+  let result=CheckResult(modifiedArray,userResult);
+  return { type: "MOVETOTHERIGHT", boardArray: modifiedArray,result:result };
 };
 
 export const MoveToTheLeft = (
-  array: [[null | number]],
-  disableThisAction: any
+  array: number[][],
+  disableThisAction: any,
+  userResult:number
 ) => {
   let modifiedArray = [...array];
   let canAddNewNumber = false;
@@ -116,15 +169,16 @@ export const MoveToTheLeft = (
   if (canAddNewNumber) {
     AddNewNumberToBoard(modifiedArray, 2);
   }
-  console.log("move to the left :)");
-  window.removeEventListener("keyup", disableThisAction);
 
-  return { type: "MOVETOTHELEFT", boardArray: modifiedArray };
+  window.removeEventListener("keyup", disableThisAction);
+  let result=CheckResult(modifiedArray,userResult);
+  return { type: "MOVETOTHELEFT", boardArray: modifiedArray,result:result };
 };
 
 export const MoveToTheTop = (
-  array: [[null | number]],
-  disableThisAction: any
+  array: number[][],
+  disableThisAction: any,
+  userResult:number
 ) => {
   let modifiedArray = [...array];
   let canAddNewNumber = false;
@@ -165,15 +219,16 @@ export const MoveToTheTop = (
     AddNewNumberToBoard(modifiedArray, 2);
   }
 
-  console.log("moved up:)");
-  window.removeEventListener("keyup", disableThisAction);
 
-  return { type: "MOVETOTHETOP", boardArray: modifiedArray };
+  window.removeEventListener("keyup", disableThisAction);
+  let result=CheckResult(modifiedArray,userResult);
+  return { type: "MOVETOTHETOP", boardArray: modifiedArray,result:result };
 };
 
 export const MoveToTheBottom = (
-  array: [[null | number]],
-  disableThisAction: any
+  array: number[][],
+  disableThisAction: any,
+  userResult:number
 ) => {
   let modifiedArray = [...array];
   let canAddNewNumber = false;
@@ -213,8 +268,9 @@ export const MoveToTheBottom = (
   if (canAddNewNumber) {
     AddNewNumberToBoard(modifiedArray, 2);
   }
-  console.log("moved bottom:)");
+
   window.removeEventListener("keyup", disableThisAction);
 
-  return { type: "MOVETOTHEBOTTOM", boardArray: modifiedArray };
+  let result=CheckResult(modifiedArray,userResult);
+  return { type: "MOVETOTHELEFT", boardArray: modifiedArray,result:result };
 };

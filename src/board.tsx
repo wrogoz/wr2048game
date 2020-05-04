@@ -7,7 +7,7 @@ import {MoveToTheLeft} from './redux/actions';
 interface BoardProps {
   boardArray: any;
   dispatch: any;
-  bubu: boolean;
+  result:number;
 }
 
 const Board = (props: BoardProps) => {
@@ -17,16 +17,16 @@ const Board = (props: BoardProps) => {
 
   const KeyPressAction = (e: { keyCode: number }) => {
     if (e.keyCode === 39) {
-      props.dispatch(MoveToTheRight(props.boardArray,KeyPressAction))
+      props.dispatch(MoveToTheRight(props.boardArray,KeyPressAction,props.result))
       }
     else if(e.keyCode===37){
-      props.dispatch(MoveToTheLeft(props.boardArray,KeyPressAction));
+      props.dispatch(MoveToTheLeft(props.boardArray,KeyPressAction,props.result));
     }
     else if(e.keyCode===38){
-      props.dispatch(MoveToTheTop(props.boardArray,KeyPressAction));
+      props.dispatch(MoveToTheTop(props.boardArray,KeyPressAction,props.result));
     }
     else if(e.keyCode===40){
-      props.dispatch(MoveToTheBottom(props.boardArray,KeyPressAction));
+      props.dispatch(MoveToTheBottom(props.boardArray,KeyPressAction,props.result));
     }
     else if(e.keyCode===65){
 
@@ -66,10 +66,11 @@ const Tile = styled.div`
   border-radius:10%;
 `;
 
-const mapStateToProps = (state: { boardArray: any; bubu: boolean }) => {
+const mapStateToProps = (state: { boardArray: any ,result:number }) => {
   return {
     boardArray: state.boardArray,
-    bubu: state.bubu,
+
+    result:state.result
   };
 };
 

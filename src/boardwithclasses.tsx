@@ -1,40 +1,40 @@
 import React, { Component } from 'react'
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { AddNewNumberToBoard, MoveToTheTop, MoveToTheBottom } from "./redux/actions";
+import {  MoveToTheTop, MoveToTheBottom, StartNewGame } from "./redux/actions";
 import {MoveToTheRight} from './redux/actions';
 import {MoveToTheLeft} from './redux/actions';
 interface BoardProps {
-    boardArray: any;
+    boardArray: number[][];
     dispatch: any;
+    result:number;
 
   }
 
 class Boardwithclasses extends Component<BoardProps,{}> {
 
 componentDidMount(){
-    this.props.dispatch(AddNewNumberToBoard(this.props.boardArray,2+2*Math.round(Math.random())))
-    this.props.dispatch(AddNewNumberToBoard(this.props.boardArray,2+2*Math.round(Math.random())))
+    this.props.dispatch(StartNewGame());
 }
 
     KeyPressAction = (e: { keyCode: number }) => {
         if (e.keyCode === 39) {
-          this.props.dispatch(MoveToTheRight( this.props.boardArray,this.KeyPressAction))
+          this.props.dispatch(MoveToTheRight( this.props.boardArray,this.KeyPressAction,this.props.result))
 
           }
 
         else if(e.keyCode===37){
-          this.props.dispatch(MoveToTheLeft(this.props.boardArray,this.KeyPressAction));
+          this.props.dispatch(MoveToTheLeft(this.props.boardArray,this.KeyPressAction,this.props.result));
 
 
         }
         else if(e.keyCode===38){
-            this.props.dispatch(MoveToTheTop(this.props.boardArray,this.KeyPressAction));
+            this.props.dispatch(MoveToTheTop(this.props.boardArray,this.KeyPressAction,this.props.result));
 
 
         }
         else if(e.keyCode===40){
-            this.props.dispatch(MoveToTheBottom(this.props.boardArray,this.KeyPressAction));
+            this.props.dispatch(MoveToTheBottom(this.props.boardArray,this.KeyPressAction,this.props.result));
 
 
         }
@@ -47,6 +47,7 @@ componentDidMount(){
 
     render() {
         window.addEventListener("keyup", this.KeyPressAction)
+
         const board = this.props.boardArray.map((el: React.ReactNode[], key: number) => {
             return (
               <BoardRow key={key}>
@@ -58,7 +59,7 @@ componentDidMount(){
             );
           });
         return (
-            <>{board}</>
+            <>{board}{this.props.result===16?<p>congratulation</p>:null}</>
 
         )
     }
@@ -79,10 +80,10 @@ const Tile = styled.div`
   border: 1px solid black;
 `;
 
-const mapStateToProps = (state: { boardArray: any;}) => {
+const mapStateToProps = (state: { boardArray: number[][],result:number}) => {
   return {
     boardArray: state.boardArray,
-
+    result:state.result
   };
 };
 
