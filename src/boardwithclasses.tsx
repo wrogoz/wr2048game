@@ -8,6 +8,7 @@ interface BoardProps {
     boardArray: number[][];
     dispatch: any;
     result:number;
+    gameOver:boolean;
 
   }
 
@@ -46,7 +47,10 @@ componentDidMount(){
       };
 
     render() {
+      if(!this.props.gameOver){
         window.addEventListener("keyup", this.KeyPressAction)
+      }
+
 
         const board = this.props.boardArray.map((el: React.ReactNode[], key: number) => {
             return (
@@ -59,7 +63,7 @@ componentDidMount(){
             );
           });
         return (
-            <>{board}{this.props.result===16?<p>congratulation</p>:null}</>
+            <>{board}</>
 
         )
     }
@@ -80,10 +84,11 @@ const Tile = styled.div`
   border: 1px solid black;
 `;
 
-const mapStateToProps = (state: { boardArray: number[][],result:number}) => {
+const mapStateToProps = (state: { boardArray: number[][],result:number,gameOver:boolean}) => {
   return {
     boardArray: state.boardArray,
-    result:state.result
+    result:state.result,
+    gameOver:state.gameOver
   };
 };
 

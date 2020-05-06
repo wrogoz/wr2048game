@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import Board from "./board";
+
 import Boardwithclasses from './boardwithclasses'
 import Button from './newGameButton';
 
+interface AppProps {
 
-const App = () => {
+  result:number;
+  gameOver:boolean;
+}
+const App = (props: AppProps ) => {
 
+useEffect(() => {
+  console.log(props.gameOver)
 
+},[props.gameOver])
 
   return (
     <Container>
       <Table>
         <Button btnText="New Game"/>
         <Boardwithclasses/>
+  <Score>Score: {props.result}</Score>
+  {props.gameOver?<Score>Game Over </Score>:null }
+
       </Table>
     </Container>
   );
@@ -29,7 +39,7 @@ const Container = styled.div`
   align-items: center;
 `;
 const Table = styled.div`
-  height: 400px;
+  height: 500px;
   width: 400px;
   background-color: #fff;
   border:2px solid #777;
@@ -41,10 +51,20 @@ const Table = styled.div`
   padding:15px;
   position:relative;
 `;
+const Score = styled.p`
+  text-align:center;
+  text-transform:uppercase;
+  font-size:2rem;
+  margin: 0;
+  border-top:1px solid #777;
+  padding:10px;
 
-const mapStateToProps = (state: { array: any }) => {
+`
+const mapStateToProps = (state: { array: any ,result:number,gameOver:boolean}) => {
   return {
     array: state.array,
+    result:state.result,
+    gameOver:state.gameOver
   };
 };
 

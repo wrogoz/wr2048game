@@ -8,6 +8,7 @@ interface BoardProps {
   boardArray: any;
   dispatch: any;
   result:number;
+  gameOver:boolean;
 }
 
 const Board = (props: BoardProps) => {
@@ -35,7 +36,7 @@ const Board = (props: BoardProps) => {
   };
 
 
-  window.addEventListener("keyup", KeyPressAction);
+    window.addEventListener("keyup", KeyPressAction);
 
   const board = props.boardArray.map((el: any, key: number) => {
     return (
@@ -66,10 +67,10 @@ const Tile = styled.div`
   border-radius:10%;
 `;
 
-const mapStateToProps = (state: { boardArray: any ,result:number }) => {
+const mapStateToProps = (state: { boardArray: any ,result:number,gameOver:boolean }) => {
   return {
     boardArray: state.boardArray,
-
+    gameOver:state.gameOver,
     result:state.result
   };
 };

@@ -1,3 +1,6 @@
+import {IsGameOver} from '../gameOver'
+
+
 const Add2or4ToArray=(userArray:any[][])=>{
   let array=userArray;
   let index1 = Math.floor(Math.random() * 4);
@@ -33,24 +36,34 @@ modifiedArray=Add2or4ToArray(modifiedArray);
 
 }
 
+
+
+
+
 export const AddNewNumberToBoard = (array: number[][], numberValue: number) => {
   let modifiedArray = [...array];
-  let index1 = Math.floor(Math.random() * 4);
-  let index2 = Math.floor(Math.random() * 4);
-  let isNumberHasAdded = false;
-  while (!isNumberHasAdded) {
-    if (modifiedArray[index1][index2] === null && isNumberHasAdded === false) {
-      modifiedArray[index1][index2] = numberValue;
-      isNumberHasAdded = true;
+
+
+
+    let index1 = Math.floor(Math.random() * 4);
+    let index2 = Math.floor(Math.random() * 4);
+    let isNumberHasAdded = false;
+    while (!isNumberHasAdded) {
+      if (modifiedArray[index1][index2] === null && isNumberHasAdded === false) {
+        modifiedArray[index1][index2] = numberValue;
+        isNumberHasAdded = true;
 
     } else {
       index1 = Math.floor(Math.random() * 4);
       index2 = Math.floor(Math.random() * 4);
+
     }
   }
 
   return { type: "ADD_NEW_NUMBER_TO_TABLE", boardArray: modifiedArray };
-};
+  };
+
+
 
 
 
@@ -113,13 +126,13 @@ export const MoveToTheRight = (
       counter++;
     }
   }
-
+  window.removeEventListener("keyup", disableThisAction);
+  let result=CheckResult(modifiedArray,userResult);
   if (canAddNewNumber) {
     AddNewNumberToBoard(modifiedArray, 2);
   }
-  window.removeEventListener("keyup", disableThisAction);
-  let result=CheckResult(modifiedArray,userResult);
-  return { type: "MOVETOTHERIGHT", boardArray: modifiedArray,result:result };
+  let gameOver= (result===2048? true : IsGameOver(modifiedArray));
+  return { type: "MOVETOTHERIGHT", boardArray: modifiedArray,result:result,gameOver:gameOver };
 };
 
 export const MoveToTheLeft = (
@@ -166,13 +179,13 @@ export const MoveToTheLeft = (
       counter++;
     }
   }
+  window.removeEventListener("keyup", disableThisAction);
+  let result=CheckResult(modifiedArray,userResult);
   if (canAddNewNumber) {
     AddNewNumberToBoard(modifiedArray, 2);
   }
-
-  window.removeEventListener("keyup", disableThisAction);
-  let result=CheckResult(modifiedArray,userResult);
-  return { type: "MOVETOTHELEFT", boardArray: modifiedArray,result:result };
+  let gameOver= (result===2048? true : IsGameOver(modifiedArray));
+  return { type: "MOVETOTHELEFT", boardArray: modifiedArray,result:result,gameOver:gameOver };
 };
 
 export const MoveToTheTop = (
@@ -215,14 +228,15 @@ export const MoveToTheTop = (
       counter++;
     }
   }
+  window.removeEventListener("keyup", disableThisAction);
+  let result=CheckResult(modifiedArray,userResult);
+
   if (canAddNewNumber) {
     AddNewNumberToBoard(modifiedArray, 2);
   }
+  let gameOver= (result===2048? true : IsGameOver(modifiedArray));
 
-
-  window.removeEventListener("keyup", disableThisAction);
-  let result=CheckResult(modifiedArray,userResult);
-  return { type: "MOVETOTHETOP", boardArray: modifiedArray,result:result };
+  return { type: "MOVETOTHETOP", boardArray: modifiedArray,result:result,gameOver:gameOver };
 };
 
 export const MoveToTheBottom = (
@@ -265,12 +279,13 @@ export const MoveToTheBottom = (
       counter++;
     }
   }
+window.removeEventListener("keyup", disableThisAction);
+  let result=CheckResult(modifiedArray,userResult);
+
   if (canAddNewNumber) {
     AddNewNumberToBoard(modifiedArray, 2);
   }
+  let gameOver= (result===2048? true : IsGameOver(modifiedArray));
 
-  window.removeEventListener("keyup", disableThisAction);
-
-  let result=CheckResult(modifiedArray,userResult);
-  return { type: "MOVETOTHELEFT", boardArray: modifiedArray,result:result };
+  return { type: "MOVETOTHELEFT", boardArray: modifiedArray,result:result,gameOver:gameOver };
 };
