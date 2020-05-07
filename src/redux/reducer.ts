@@ -8,12 +8,14 @@ let initialState:{} = {
       [null,null,null,null],
       [null,null,null,null],
       [null,null,null,null]
-]
+],
+  displayAnimation:false,
+  animationDirection:'left'
 }
 
 
 
-  const reducer = (state = initialState, action: { type: string ,boardArray:number[][],gameOver:boolean,result:number})=> {
+  const reducer = (state = initialState, action: { type: string ,boardArray:number[][],gameOver:boolean,result:number, displayAnimation:boolean,animationDirection:string})=> {
       switch (action.type) {
 
           case 'ADD_NEW_NUMBER_TO_TABLE':
@@ -36,7 +38,8 @@ let initialState:{} = {
               ...state,
               boardArray:action.boardArray,
               result:action.result,
-              gameOver:action.gameOver
+              gameOver:action.gameOver,
+              displayAnimation:action.displayAnimation
               }
               case "MOVETOTHETOP":
               return {
@@ -68,6 +71,11 @@ let initialState:{} = {
             return {
             ...state,
             gameOver:true
+            }
+            case 'DISPLAY_ANIMATION':
+            return {
+            ...state,
+            displayAnimation:action.displayAnimation
             }
         default:
           return state

@@ -1,9 +1,9 @@
 import React,{useEffect} from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { AddNewNumberToBoard, MoveToTheTop, MoveToTheBottom } from "./redux/actions";
-import {MoveToTheRight} from './redux/actions';
-import {MoveToTheLeft} from './redux/actions';
+import {  MoveToTheTop, MoveToTheBottom } from "./redux/actions/actions";
+import {MoveToTheRight} from './redux/actions/actions';
+import {MoveToTheLeft} from './redux/actions/actions';
 interface BoardProps {
   boardArray: any;
   dispatch: any;

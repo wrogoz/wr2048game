@@ -1,85 +1,7 @@
-import {IsGameOver} from '../gameOver'
+import {IsGameOver} from './gameOver'
+import {AddNewNumberToBoard} from './addNewNumberToBoard';
+import {CheckResult} from './checkResult';
 
-
-const Add2or4ToArray=(userArray:any[][])=>{
-  let array=userArray;
-  let index1 = Math.floor(Math.random() * 4);
-  let index2 = Math.floor(Math.random() * 4);
-  let isNumberHasAdded = false;
-  while (!isNumberHasAdded) {
-    if (userArray[index1][index2] === null && isNumberHasAdded === false) {
-      userArray[index1][index2] = 2+2*Math.round(Math.random());
-      isNumberHasAdded = true;
-
-    } else {
-      index1 = Math.floor(Math.random() * 4);
-      index2 = Math.floor(Math.random() * 4);
-    }
-  }
-  return array
-}
-export const StartNewGame = ()=>{
-
-   let modifiedArray: any[][]=[
-    [null,null,null,null],
-    [null,null,null,null],
-    [null,null,null,null],
-    [null,null,null,null]
-];
-modifiedArray=Add2or4ToArray(modifiedArray);
-modifiedArray=Add2or4ToArray(modifiedArray);
-  return {
-    type:"START_NEW_GAME",
-    boardArray:modifiedArray,
-    result:0
-  }
-
-}
-
-
-
-
-
-export const AddNewNumberToBoard = (array: number[][], numberValue: number) => {
-  let modifiedArray = [...array];
-
-
-
-    let index1 = Math.floor(Math.random() * 4);
-    let index2 = Math.floor(Math.random() * 4);
-    let isNumberHasAdded = false;
-    while (!isNumberHasAdded) {
-      if (modifiedArray[index1][index2] === null && isNumberHasAdded === false) {
-        modifiedArray[index1][index2] = numberValue;
-        isNumberHasAdded = true;
-
-    } else {
-      index1 = Math.floor(Math.random() * 4);
-      index2 = Math.floor(Math.random() * 4);
-
-    }
-  }
-
-  return { type: "ADD_NEW_NUMBER_TO_TABLE", boardArray: modifiedArray };
-  };
-
-
-
-
-
-
-export const CheckResult=(userArray:any[][],userResult:number)=>{
-  let result=userResult;
-  userArray.forEach(element => {
-    element.forEach( tile => {
-      if(tile>result){
-        result=tile
-      }
-    });
-  });
-
-  return result;
-}
 
 export const MoveToTheRight = (
   array: number[][],
@@ -287,5 +209,5 @@ window.removeEventListener("keyup", disableThisAction);
   }
   let gameOver= (result===2048? true : IsGameOver(modifiedArray));
 
-  return { type: "MOVETOTHELEFT", boardArray: modifiedArray,result:result,gameOver:gameOver };
+  return { type: "MOVETOTHEBOTTOM", boardArray: modifiedArray,result:result,gameOver:gameOver };
 };
