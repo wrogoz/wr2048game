@@ -27,13 +27,16 @@ const Button = (props:ButtonProps)=>{
 
 
 const StyledButton = styled.button`
-  background-color:#fff;
-  border-radius:1px solid #777;
-  padding:10px;
-  position:absolute;
-  right:40%;
-  top:-60px;
-  border-radius:10%;
+background-color: #fff;
+border: 1px solid #777;
+padding: 12px;
+position: absolute;
+right: 40%;
+top: -60px;
+border-radius: 65%;
+&&:active,&&:focus{
+  outline:none;
+}
 `
 const mapStateToProps = (state: { boardArray: any;}) => {
     return {
