@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import styled,{keyframes,css} from "styled-components";
+import styled from "styled-components";
 import { connect } from "react-redux";
 import {MoveToTheTop } from "./redux/actions/moveTileTop";
 import {MoveToTheBottom } from "./redux/actions/moveTileBottom";
 import {MoveToTheRight} from './redux/actions/moveTileRight';
 import {MoveToTheLeft} from './redux/actions/moveTileLeft';
 import {StartNewGame} from './redux/actions/startGame';
+import {TileNumb} from './tilenumber'
 interface BoardProps {
     boardArray: number[][];
     dispatch: any;
@@ -23,32 +24,40 @@ componentDidMount(){
 }
 
     KeyPressAction = (e: { preventDefault: () => void; keyCode: number; }) => {
-      e.preventDefault();
+
         if (e.keyCode === 39) {
           this.props.dispatch(MoveToTheRight( this.props.boardArray,this.KeyPressAction,this.props.result))
-          this.props.dispatch({type:"DISPLAY_ANIMATION",displayAnimation:false})
+          setTimeout(() => {
+            this.props.dispatch({type:'RESET_TILE_ANIMATION'})
+          }, 400);
+
           }
 
         else if(e.keyCode===37){
           this.props.dispatch(MoveToTheLeft(this.props.boardArray,this.KeyPressAction,this.props.result));
-          this.props.dispatch({type:"DISPLAY_ANIMATION",displayAnimation:false})
+          setTimeout(() => {
+            this.props.dispatch({type:'RESET_TILE_ANIMATION'})
+          }, 400);
+
 
         }
         else if(e.keyCode===38){
             this.props.dispatch(MoveToTheTop(this.props.boardArray,this.KeyPressAction,this.props.result));
-            this.props.dispatch({type:"DISPLAY_ANIMATION",displayAnimation:false})
+            setTimeout(() => {
+              this.props.dispatch({type:'RESET_TILE_ANIMATION'})
+            }, 400);
+
 
         }
         else if(e.keyCode===40){
             this.props.dispatch(MoveToTheBottom(this.props.boardArray,this.KeyPressAction,this.props.result));
-            this.props.dispatch({type:"DISPLAY_ANIMATION",displayAnimation:false})
+            setTimeout(() => {
+              this.props.dispatch({type:'RESET_TILE_ANIMATION'})
+            }, 400);
+
 
         }
       };
-
-
-
-
 
     render() {
       if(!this.props.gameOver){
@@ -59,10 +68,10 @@ componentDidMount(){
         const board = this.props.boardArray.map((el: React.ReactNode[], key: number) => {
             return (
               <BoardRow key={key}>
-                <Tile ><Num animate={this.props.displayAnimation} >{el[0]}</Num></Tile>
-                <Tile><Num animate={this.props.displayAnimation}>{el[1]}</Num></Tile>
-                <Tile><Num animate={this.props.displayAnimation}>{el[2]}</Num></Tile>
-                <Tile><Num animate={this.props.displayAnimation}>{el[3]}</Num></Tile>
+                <Tile><TileNumb animate={this.props.animationDirection} >{el[0]}</TileNumb></Tile>
+                <Tile><TileNumb animate={this.props.animationDirection}>{el[1]}</TileNumb></Tile>
+                <Tile><TileNumb animate={this.props.animationDirection}>{el[2]}</TileNumb></Tile>
+                <Tile><TileNumb animate={this.props.animationDirection}>{el[3]}</TileNumb></Tile>
 
               </BoardRow>
             );
@@ -93,67 +102,8 @@ const Tile:any = styled.div`
 
 
 `;
-const moveNumToRight=keyframes`
- from{
-  opacity:0;
-  transform:translateX(-30px);
- }
- to{
-opacity:1;
-transform:translateX(0px);
- }
-`
-const moveNumToLeft=keyframes`
- from{
-  opacity:0;
-  transform:translateX(30px);
- }
- to{
-opacity:1;
-transform:translateX(0px);
 
- }
-`
-const moveNumToBottom=keyframes`
- from{
-  opacity:0;
-  transform:translateY(30px);
- }
- to{
-opacity:1;
-transform:translateX(0px);
- }
-`
-const moveNumToTop=keyframes`
- from{
-  opacity:0.5;
-  transform:translateY(-100px);
- }
- to{
-opacity:1;
-transform:translateX(0px);
- }
-`
-
-let animationDirection:any;
-
-  animationDirection=moveNumToLeft
-
-
-
-const numAnimation =
-  css`
-    ${animationDirection } 0.1s linear;
-  `
-const Num:any=styled.p`
-
-    animation:${(props:any)=>props.animate===true?numAnimation :null};
-
-    font-size: 2rem;
-    color:#777;
-  `
-
-const mapStateToProps = (state: { boardArray: number[][],result:number,gameOver:boolean,displayAnimation:boolean,animationDirection:string}) => {
+const mapStateToProps = (state: { boardArray: number[][],result:number,gameOver:boolean,displayAnimation:boolean,animationDirection:string | null}) => {
   return {
     boardArray: state.boardArray,
     result:state.result,

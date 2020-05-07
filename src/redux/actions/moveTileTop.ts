@@ -52,5 +52,5 @@ export const MoveToTheTop = (
   }
   let gameOver= (result===2048? true : IsGameOver(modifiedArray));
 
-  return { type: "MOVETOTHETOP", boardArray: modifiedArray,result:result,gameOver:gameOver,displayAnimation:true };
+  return { type: "MOVETOTHETOP", boardArray: modifiedArray,result:result,gameOver:gameOver};
 };

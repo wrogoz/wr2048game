@@ -50,5 +50,5 @@ export const MoveToTheBottom = (
     }
     let gameOver= (result===2048? true : IsGameOver(modifiedArray));
 
-    return { type: "MOVETOTHEBOTTOM", boardArray: modifiedArray,result:result,gameOver:gameOver,displayAnimation:true };
+    return { type: "MOVETOTHEBOTTOM", boardArray: modifiedArray,result:result,gameOver:gameOver };
   };

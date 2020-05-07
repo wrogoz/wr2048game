@@ -54,6 +54,6 @@ export const MoveToTheRight = (
     AddNewNumberToBoard(modifiedArray, 2);
   }
   let gameOver= (result===2048? true : IsGameOver(modifiedArray));
-  return { type: "MOVETOTHERIGHT", boardArray: modifiedArray,result:result,gameOver:gameOver,displayAnimation:true };
+  return { type: "MOVETOTHERIGHT", boardArray: modifiedArray,result:result,gameOver:gameOver};
 };
 

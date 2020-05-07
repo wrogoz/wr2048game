@@ -10,14 +10,23 @@ let initialState:{} = {
       [null,null,null,null]
 ],
   displayAnimation:false,
-  animationDirection:'left'
+  animationDirection:'bottom'
 }
 
 
 
-  const reducer = (state = initialState, action: { type: string ,boardArray:number[][],gameOver:boolean,result:number, displayAnimation:boolean,animationDirection:string})=> {
+  const reducer = (state = initialState, action: { type: string ,boardArray:number[][],gameOver:boolean,result:number, displayAnimation:boolean,animationDirection:string | boolean})=> {
       switch (action.type) {
 
+
+          case "START_NEW_GAME":
+                return {
+                ...state,
+                boardArray:action.boardArray,
+                result:action.result,
+                gameOver:false,
+                animationDirection:false
+                }
           case 'ADD_NEW_NUMBER_TO_TABLE':
             return {
             ...state,
@@ -29,7 +38,8 @@ let initialState:{} = {
             ...state,
             boardArray:action.boardArray,
               result:action.result,
-              gameOver:action.gameOver
+              gameOver:action.gameOver,
+              animationDirection:'right'
 
 
             }
@@ -39,29 +49,25 @@ let initialState:{} = {
               boardArray:action.boardArray,
               result:action.result,
               gameOver:action.gameOver,
-              displayAnimation:action.displayAnimation
+              animationDirection:'left'
               }
               case "MOVETOTHETOP":
               return {
               ...state,
               boardArray:action.boardArray,
               result:action.result,
-              gameOver:action.gameOver
+              gameOver:action.gameOver,
+              animationDirection:'top'
               }
               case 'MOVETOTHEBOTTOM':
               return {
               ...state,
               boardArray:action.boardArray,
               result:action.result,
-              gameOver:action.gameOver
+              gameOver:action.gameOver,
+              animationDirection:'bottom'
               }
-              case "START_NEW_GAME":
-              return {
-              ...state,
-              boardArray:action.boardArray,
-              result:action.result,
-              gameOver:false
-              }
+
               case 'CHANGE_RESULT':
                 return{
                   ...state,
@@ -72,10 +78,10 @@ let initialState:{} = {
             ...state,
             gameOver:true
             }
-            case 'DISPLAY_ANIMATION':
+            case 'RESET_TILE_ANIMATION':
             return {
             ...state,
-            displayAnimation:action.displayAnimation
+            displayAnimation:false
             }
         default:
           return state
