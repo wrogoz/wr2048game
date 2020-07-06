@@ -1,4 +1,4 @@
-# 2048 game
+# 2048 game desktop version
 
 # Technologies:
 - ES6
@@ -6,13 +6,6 @@
 - React
 - Redux
 - Styled-components
-
-
-
-
-# Features:
-
--
 
 # Status:
 
