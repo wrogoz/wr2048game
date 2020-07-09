@@ -79,22 +79,22 @@ class Boardwithclasses extends Component<BoardProps, {}> {
         return (
           <BoardRow key={key}>
             <Tile>
-              <TileNumb animate={this.props.animationDirection}>
+              <TileNumb >
                 {el[0]}
               </TileNumb>
             </Tile>
             <Tile>
-              <TileNumb animate={this.props.animationDirection}>
+              <TileNumb >
                 {el[1]}
               </TileNumb>
             </Tile>
             <Tile>
-              <TileNumb animate={this.props.animationDirection}>
+              <TileNumb >
                 {el[2]}
               </TileNumb>
             </Tile>
             <Tile>
-              <TileNumb animate={this.props.animationDirection}>
+              <TileNumb >
                 {el[3]}
               </TileNumb>
             </Tile>

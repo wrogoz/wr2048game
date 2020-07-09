@@ -12,10 +12,7 @@ interface AppProps {
 }
 const App = (props: AppProps ) => {
 
-useEffect(() => {
-  console.log(props.gameOver)
 
-},[props.gameOver])
 
   return (
     <Container>
@@ -31,8 +28,8 @@ useEffect(() => {
 };
 
 const Container = styled.div`
-  height: 100vh;
-  width: 100vw;
+  height: 96vh;
+  width: 98vw;
   background-color: #fff;
   display: flex;
   justify-content: center;

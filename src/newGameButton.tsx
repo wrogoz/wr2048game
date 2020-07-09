@@ -28,6 +28,7 @@ const Button = (props:ButtonProps)=>{
 
 const StyledButton = styled.button`
 background-color: #fff;
+margin:10px 0 5px 0;
 border: 1px solid #777;
 padding: 12px;
 position: absolute;
